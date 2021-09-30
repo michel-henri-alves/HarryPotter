@@ -1,0 +1,83 @@
+---
+server:
+#  ssl config 
+#  port: 8443
+#  ssl.key-store: keystore.p12
+#  ssl.key-store-password: homemdeferro
+#  ssl.keyStoreType: PKCS12
+#  ssl.keyAlias: sgep1
+  port: 8080
+  contextPath: /harrypotter
+  
+## BD Intern
+---
+spring:
+  profiles: local, default
+datasource:
+  sampleapp:
+    url: jdbc:h2:~/test
+    username: SA
+    password:
+    driverClassName: org.h2.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+
+---
+
+
+# JPA specific configs
+#spring.jpa.properties.hibernate.show_sql: true
+#spring.jpa.properties.hibernate.format_sql: true
+#spring.jpa.properties.hibernate.use_sql: true
+#spring.jpa.properties.hibernate.id.new_generator_mappings: false
+#spring.jpa.properties.hibernate.default_schema: littracker
+#spring.jpa.properties.hibernate.search.autoregister_listeners: false
+#spring.jpa.properties.hibernate.bytecode.use_reflection_optimizer: false
+#
+## Enable logging
+#logging.level.org.hibernate.SQL: DEBUG
+## Enable logging for HikariCP to verify that it is used
+#logging.level.com.zaxxer.hikari.HikariConfig: DEBUG
+#logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE 
+
+
+Configuration:
+  name: harrypotter
+ 
+  Properties:
+    Property:
+      name: log-path
+      value: "logs"
+ 
+  Appenders:
+ 
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+ 
+    File:
+      name: File_Appender
+      fileName: ${log-path}/logfile.log
+      PatternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+ 
+  Loggers:
+ 
+      Root:
+        level: debug
+        AppenderRef:
+          - ref: Console_Appender
+ 
+      Logger:
+        - name: guru.springframework.blog.log4j2yaml
+          level: debug
+          AppenderRef:
+            - ref: File_Appender
+              level: error     

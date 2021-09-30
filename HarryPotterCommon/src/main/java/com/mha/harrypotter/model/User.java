@@ -1,5 +1,13 @@
 package com.mha.harrypotter.model;
 
+/**
+ * Entity o user
+ * 
+ * @author michel
+ * @version 0.0.1
+ * 
+ */
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -21,9 +29,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "ID")

@@ -15,7 +15,8 @@ spring:
   profiles: local, default
 datasource:
   sampleapp:
-    url: jdbc:h2:~/test
+#    url: jdbc:h2:~/hp
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;
     username: SA
     password:
     driverClassName: org.h2.Driver
@@ -28,6 +29,28 @@ datasource:
       dialect: org.hibernate.dialect.H2Dialect
 
 ---
+
+#conexao postgres dev
+#---
+#spring:
+#  profiles: local, default, prod
+#datasource:
+#  sampleapp:
+#    #linux#url: jdbc:postgresql://localhost:5432/SGEP_NEOENERGIA?createDatabaseIfNotExist=true
+#    url: jdbc:postgresql://localhost:5432/SGEP_NEOENERGIA?createDatabaseIfNotExist=true
+#    username: postgres
+#    password: postgres
+#    driverClassName: org.postgresql.Driver
+#    defaultSchema:
+#    maxPoolSize: 20
+#    hibernate:
+##      hbm2ddl.method: create
+#      hbm2ddl.method: validate
+#      show_sql: true
+#      format_sql: true
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#
+#---
 
 
 # JPA specific configs

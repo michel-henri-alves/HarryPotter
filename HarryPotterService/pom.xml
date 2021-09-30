@@ -6,9 +6,9 @@
 
 	<parent>
 		<groupId>com.mha</groupId>
-		<artifactId>HarryPotter</artifactId>
+		<artifactId>harrypotter</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../HarryPotter/pom.xml</relativePath>
+		<relativePath>../harrypotter/pom.xml</relativePath>
 	</parent>
 
 
@@ -19,6 +19,20 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.mha</groupId>
+			<artifactId>harrypotter-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mha</groupId>
+			<artifactId>harrypotter-repository</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -27,17 +41,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.mha</groupId>
-			<artifactId>HarryPotterCommon</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
+
+
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>spring-mock-mvc</artifactId>
 			<version>4.4.0</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

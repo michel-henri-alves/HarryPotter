@@ -6,16 +6,16 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mha</groupId>
-	<artifactId>HarryPotter</artifactId>
+	<artifactId>harrypotter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HarryPotter</name>
+	<name>harrypotter</name>
 	<description>Componente original</description>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>../HarryPotterCommon</module>
-		<module>../HarryPotterRepository</module>
-		<module>../HarryPotterService</module>
+		<module>../harrypotter-common</module>
+		<module>../harrypotter-repository</module>
+		<module>../harrypotter-service</module>
 	</modules>
 
 	<properties>

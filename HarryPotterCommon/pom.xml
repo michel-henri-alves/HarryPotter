@@ -6,13 +6,13 @@
 
 	<parent>
 		<groupId>com.mha</groupId>
-		<artifactId>HarryPotter</artifactId>
+		<artifactId>harrypotter</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../HarryPotter/pom.xml</relativePath>
+		<relativePath>../harrypotter/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>HarryPotterCommon</artifactId>
-	<name>HarryPotterCommon</name>
+	<artifactId>harrypotter-common</artifactId>
+	<name>harrypotter-common</name>
 	<description>Projeto contendo classes comuns aos modulos do projeto HarryPotter</description>
 	<properties>
 		<java.version>11</java.version>
@@ -26,11 +26,6 @@
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>0.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
@@ -50,7 +45,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<version>2.5.5</version>
 		</dependency>
 
 		<dependency>
@@ -58,7 +52,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

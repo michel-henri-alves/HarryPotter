@@ -1,5 +1,7 @@
 package com.mha.harrypotter.repositories;
 
+import java.util.Optional;
+
 /**
  * House Repository 
  * 
@@ -18,4 +20,5 @@ import com.mha.harrypotter.model.House;
 @Repository
 public interface HouseRepository extends PagingAndSortingRepository<House, Long>, JpaSpecificationExecutor<House>, HouseRepositoryFilter {
 	
+	Optional<House> findById(String arg0);
 }

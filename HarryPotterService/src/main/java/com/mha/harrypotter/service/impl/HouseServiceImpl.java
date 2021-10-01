@@ -115,11 +115,6 @@ public class HouseServiceImpl implements HouseService {
 
 	}
 
-	@Override
-	public Optional<House> getById(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Optional<House> getByName(String arg0) {
@@ -131,6 +126,11 @@ public class HouseServiceImpl implements HouseService {
 	public void delete(int arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Optional<House> getById(String arg0) {
+		return repo.findById(arg0);
 	}
 
 }

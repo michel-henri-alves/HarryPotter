@@ -53,8 +53,8 @@ public class CharacterRepositoryFilterImpl implements  CharacterRepositoryFilter
 			if (StringUtils.isNotBlank(opt.get().getRole()))
 				criteria.add(Restrictions.eq("role", obj.getRole()));
 			
-			if (StringUtils.isNotBlank(opt.get().getSchool()))
-				criteria.add(Restrictions.eq("school", obj.getSchool()));
+//			if (StringUtils.isNotBlank(opt.get().getSchool()))
+//				criteria.add(Restrictions.eq("school", obj.getSchool()));
 			
 			if (StringUtils.isNotBlank(opt.get().getPatronus()))
 				criteria.add(Restrictions.eq("patronus", obj.getPatronus()));

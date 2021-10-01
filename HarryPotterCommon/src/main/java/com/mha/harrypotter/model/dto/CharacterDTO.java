@@ -44,14 +44,11 @@ public class CharacterDTO {
 	private String role;
 	@Getter
 	@Setter
-	private List<String> colors;
-	@Getter
-	@Setter
 	private String school;
 	@ApiModelProperty(notes = "character`s house")
 	@Getter
 	@Setter
-	private House house;
+	private String house;
 	@Getter
 	@Setter
 	private String patronus;

@@ -9,14 +9,15 @@ package com.mha.harrypotter.model;
  */
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -47,16 +48,8 @@ public class Character implements Serializable{
 	@Getter
 	@Setter
 	private String role;
-	@ElementCollection
-	@Column(name = "COLORS", nullable = false, length = 50, unique = true)
-	@Getter
-	@Setter
-	private List<String> colors;
-	@Column(name = "SCHOOL", nullable = false, length = 30, unique = true)
-	@Getter
-	@Setter
-	private String school;
-	@Column(name = "HOUSE", nullable = false, length = 30, unique = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_HOUSE")
 	@Getter
 	@Setter
 	private House house;

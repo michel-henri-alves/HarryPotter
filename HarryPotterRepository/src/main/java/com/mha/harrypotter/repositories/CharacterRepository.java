@@ -1,5 +1,8 @@
 package com.mha.harrypotter.repositories;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Character Repository 
  * 
@@ -13,10 +16,15 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.mha.harrypotter.model.Character;
+import com.mha.harrypotter.model.House;
 
 
 
 @Repository
 public interface CharacterRepository extends PagingAndSortingRepository<Character, Long>, JpaSpecificationExecutor<Character>, CharacterRepositoryFilter {
+	
+	Optional<Character> findByName(String name);
+	List<Character> findAll();
+	List<Character> findByHouse(House house);
 	
 }

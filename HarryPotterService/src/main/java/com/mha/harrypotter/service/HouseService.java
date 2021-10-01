@@ -15,15 +15,18 @@ import java.util.Optional;
 import com.mha.harrypotter.model.House;
 import com.mha.harrypotter.model.dto.HouseDTO;
 
-
 public interface HouseService {
 
 	Optional<House> save(Optional<House> arg0);
+
 	List<House> listAll();
+
 	void update(Optional<House> arg0, int arg1);
-	Optional<House> getById(int arg0);
+
 	Optional<House> getByName(String arg0);
+
 	void delete(int arg0);
+
 	/**
 	 *
 	 * save on repository by dto object
@@ -32,6 +35,7 @@ public interface HouseService {
 	 * 
 	 */
 	void save(HouseDTO arg0);
+
 	/**
 	 *
 	 * save all houses retrieved by potterapi
@@ -39,5 +43,13 @@ public interface HouseService {
 	 * 
 	 */
 	void getAll();
-	
+
+	/**
+	 * find house by name
+	 *
+	 * @param String - house id
+	 * @return Optional<House>
+	 * 
+	 */
+	Optional<House> getById(String arg0);
 }

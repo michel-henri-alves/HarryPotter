@@ -1,16 +1,6 @@
 package com.mha.harrypotter.model.dto;
 
 /**
- * data transfer to character object
- * 
- * @author michel
- * @version 0.0.1
- * 
- */
-
-import java.util.List;
-
-/**
  * Object will be passed by parameter to API for obtain token 
  * 
  * @author michel
@@ -20,7 +10,6 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.mha.harrypotter.model.House;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -35,6 +24,9 @@ import lombok.ToString;
 @ToString
 public class CharacterDTO {
 	
+	@Getter
+	@Setter
+	private String id;
 	@ApiModelProperty(notes = "character name")
 	@Getter
 	@Setter

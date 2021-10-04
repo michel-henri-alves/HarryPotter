@@ -9,6 +9,8 @@ package com.mha.harrypotter.model.dto;
  */
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 /**
  * Object will be passed by parameter to API for obtain token 
  * 
@@ -19,6 +21,7 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.annotations.SerializedName;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -34,6 +37,8 @@ import lombok.ToString;
 public class HouseDTO {
 	
 	@ApiModelProperty(notes = "house id")
+	@JsonAlias("house")
+	@SerializedName(value="id", alternate="house")
 	@Getter
 	@Setter
 	private String id;

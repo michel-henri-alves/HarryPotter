@@ -1,5 +1,7 @@
 package com.mha.harrypotter.model.dto;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +19,9 @@ public class Message {
 	@Getter
 	@Setter
 	private String message;
+	@Getter
+	@Setter
+	private HttpStatus status;
+	
 
 }

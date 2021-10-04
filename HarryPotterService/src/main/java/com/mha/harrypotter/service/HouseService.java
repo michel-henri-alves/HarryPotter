@@ -1,7 +1,5 @@
 package com.mha.harrypotter.service;
 
-import java.util.List;
-
 /**
  * interface for HouseService
  * 
@@ -17,15 +15,12 @@ import com.mha.harrypotter.model.dto.HouseDTO;
 
 public interface HouseService {
 
-	Optional<House> save(Optional<House> arg0);
-
-	List<House> listAll();
-
-	void update(Optional<House> arg0, int arg1);
-
-	Optional<House> getByName(String arg0);
-
-	void delete(int arg0);
+	/**
+	 *
+	 * get all houses from API and persist
+	 * 
+	 */
+	public void getAll();
 
 	/**
 	 *
@@ -34,22 +29,36 @@ public interface HouseService {
 	 * @param HouseDTO
 	 * 
 	 */
-	void save(HouseDTO arg0);
-
+	public void save(HouseDTO arg0);
+	
 	/**
 	 *
-	 * save all houses retrieved by potterapi
+	 * find house by name
 	 * 
+	 * @param String - house name
+	 * @return Optional<House>
 	 * 
 	 */
-	void getAll();
-
+	public Optional<House> getByName(String arg0);
+	
 	/**
-	 * find house by name
 	 *
+	 * find house by id
+	 * 
 	 * @param String - house id
 	 * @return Optional<House>
 	 * 
 	 */
-	Optional<House> getById(String arg0);
+	public Optional<House> getById(String arg0);
+
+	/**
+	 *
+	 * verify if house exists
+	 * 
+	 * @param String - house name
+	 * @return boolean
+	 * 
+	 */
+	public boolean exists(String name);
+
 }

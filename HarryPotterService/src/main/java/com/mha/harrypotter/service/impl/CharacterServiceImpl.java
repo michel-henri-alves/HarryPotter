@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.mha.harrypotter.model.Character;
 import com.mha.harrypotter.model.House;
 import com.mha.harrypotter.model.dto.CharacterDTO;
+import com.mha.harrypotter.model.dto.Message;
 import com.mha.harrypotter.repositories.CharacterRepository;
 import com.mha.harrypotter.service.CharacterService;
 import com.mha.harrypotter.service.HouseService;
@@ -42,82 +44,59 @@ public class CharacterServiceImpl implements CharacterService {
 	@Autowired
 	private ConvertEntityToDTO entityToDTO;
 
-	/**
-	 * 
-	 * create new character
-	 * 
-	 * @param Optional<CharacterDTO>
-	 * @return
-	 */
 	@Override
-	public Optional<Character> save(Optional<CharacterDTO> arg0) {
+	public Message save(CharacterDTO arg0) {
 
-		Optional<Character> response = Optional.empty();
+		Message message = new Message();
+		Optional<House> house = houseService.getById(arg0.getHouse());
 
-		if (getByName(arg0.get().getName()).isEmpty()) {
-			
-			Character character = entityToDTO.mappingObjects(arg0.get(), Character.class);
-			character.setHouse(houseService.getById(arg0.get().getHouse()).orElse(new House()));
-			response = Optional.ofNullable(repo.save(character));
+		boolean isNewCharacter = getByName(arg0.getName()).isEmpty();// register already exist?
+		boolean houseExist = house.isPresent();// house exist?
+
+		// case success
+		if (isNewCharacter && houseExist) {
+
+			// if house exist
+			Character newCharacter = entityToDTO.mappingObjects(arg0, Character.class);// convert dto to object
+			newCharacter.setHouse(house.get());
+			Optional<Character> character = Optional.ofNullable(repo.save(newCharacter));
+			message = character.isPresent()
+					? new Message("Success, " + character.get().getName() + " created!", HttpStatus.OK)
+					: new Message("Fail ", HttpStatus.BAD_REQUEST);
 		}
 
-		return response;
+		// case fail
+		else {
+
+			if (!isNewCharacter)
+				message = new Message("Register already exist", HttpStatus.ALREADY_REPORTED);
+			if (!houseExist)
+				message = new Message("House not exist", HttpStatus.BAD_REQUEST);
+
+		}
+
+		return message;
 	}
 
 	@Override
 	public List<CharacterDTO> listAll() {
-		
+
 		List<Character> response = repo.findAll();
 		return entityToDTO.mappingLists(response, CharacterDTO.class);
 	}
 
 	@Override
 	public List<CharacterDTO> listByHouse(String houseName) {
-		
+
 		List<Character> response = new ArrayList<>();
-		
+
 		Optional<House> house = houseService.getByName(houseName);
-		response = house.isPresent() ? repo.findByHouse(null)  : null;
-		
+		response = house.isPresent() ? repo.findByHouse(house.get()) : new ArrayList<>();
+
 		return entityToDTO.mappingLists(response, CharacterDTO.class);
-		
+
 	}
 
-	/**
-	 * update character register
-	 * 
-	 * @param int
-	 * @param CharacterDTO
-	 * 
-	 */
-	public void update(Long id, CharacterDTO arg1) {
-
-//		// Optional<Character> _client =
-//		characterRepo.findById(id).ifPresentOrElse(
-//				// if present
-//				(value) -> {
-//
-//					service.update(entityToDTO.mappingObjects(dto, Character.class));
-//				},
-//
-//				// else
-//				() -> {
-//				});
-//
-//		if (_client.isPresent()) {
-//			dto.setIdProduct(id);
-//			productService.update(entityToDTO.mappingObjects(dto, Product.class));
-//		}
-	}
-
-	/***
-	 *
-	 * find character by id
-	 *
-	 * @param Long id
-	 *
-	 * @return Optional<Character>
-	 */
 	@Override
 	public Optional<Character> getById(Long arg0) {
 
@@ -125,33 +104,73 @@ public class CharacterServiceImpl implements CharacterService {
 	}
 
 	@Override
-	public Optional<Character> getById(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message delete(Long arg0) {
+
+		Message message = new Message();
+		Optional<Character> character = repo.findById(arg0.intValue());
+
+		if (character.isPresent()) {
+
+			repo.delete(character.get());
+			message = new Message("Success", HttpStatus.OK);
+		}
+
+		else {
+
+			message = new Message("Register not exist", HttpStatus.BAD_REQUEST);
+		}
+
+		return message;
+
+	}
+
+
+	@Override
+	public Message update(Long arg0, CharacterDTO arg1) {
+
+		Message message = new Message();
+		Optional<House> house = houseService.getById(arg1.getHouse());
+		Optional<Character> character = repo.findById(arg0.intValue());
+
+		boolean characterExist = character.isPresent();// register already exist?
+		boolean houseExist = house.isPresent();// house exist?
+
+		// case success
+		if (characterExist && houseExist) {
+
+			// if house exist
+			Character _character = entityToDTO.mappingObjects(arg1, Character.class);
+			_character.setId(arg0.intValue());
+			_character.setHouse(house.get());
+			repo.save(_character);
+			message = new Message("Success", HttpStatus.OK);
+		}
+
+		// case fail
+		else {
+
+			if (!characterExist)
+				message = new Message("Register not exist", HttpStatus.BAD_REQUEST);
+			if (!houseExist)
+				message = new Message("House not exist", HttpStatus.BAD_REQUEST);
+
+		}
+
+		return message;
 	}
 
 	@Override
-	public void delete(int arg0) {
-		// TODO Auto-generated method stub
+	public Optional<CharacterDTO> getByName(String arg0) {
 
-	}
-
-	@Override
-	public void update(Optional<Character> arg0) {
-		// TODO Auto-generated method stub
+		Optional<Character> _character = repo.findByName(arg0);
 		
+		Optional<CharacterDTO> response = (_character.isPresent())
+				? Optional.ofNullable(entityToDTO.mappingObjects(repo.findByName(arg0).get(), CharacterDTO.class))
+				: Optional.empty();
+
+
+		return response;
 	}
 
-	@Override
-	public void update(int arg0, CharacterDTO arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Optional<Character> getByName(String arg0) {
-		
-		return repo.findByName(arg0);
-	}
 
 }

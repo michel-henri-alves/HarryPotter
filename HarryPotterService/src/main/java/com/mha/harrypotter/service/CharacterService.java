@@ -14,48 +14,77 @@ import java.util.Optional;
 
 import com.mha.harrypotter.model.Character;
 import com.mha.harrypotter.model.dto.CharacterDTO;
-
-
+import com.mha.harrypotter.model.dto.Message;
 
 public interface CharacterService {
 
-	List<CharacterDTO> listAll();
-	void update(Optional<Character> arg0);
-	Optional<Character> getById(Long arg0);
-	Optional<Character> getById(String arg0);
-	void delete(int arg0);
-	/**
-	 * update character register
-	 * 
-	 * @param int
-	 * @param CharacterDTO
-	 * 
-	 */
-	void update(int arg0, CharacterDTO arg1);
 	/**
 	 * 
 	 * create new character
 	 * 
 	 * @param Optional<CharacterDTO>
-	 * @return  
+	 * @return
 	 */
-	Optional<Character> save(Optional<CharacterDTO> arg0);
-	
+	public Message save(CharacterDTO arg0);
+
 	/**
+	 *
+	 * lista all characters
 	 * 
-	 * find character by name
-	 * 
-	 * @param String - character name
-	 * @return  Optional<Character>
+	 * @return List<CharacterDTO>
+	 *
 	 */
-	Optional<Character> getByName(String arg0);
+	public List<CharacterDTO> listAll();
+
 	/**
+	 *
+	 * lista all characters filtered by house
 	 * 
-	 * find list of character by house
-	 * 
-	 * @param String - character name
-	 * @return  List<CharacterDTO>
+	 * @param String
+	 * @return List<CharacterDTO>
+	 *
 	 */
-	List<CharacterDTO> listByHouse(String arg0);
-	
+	public List<CharacterDTO> listByHouse(String houseName);
+
+	/**
+	 *
+	 * find character by id
+	 *
+	 * @param Long id
+	 * @return Optional<Character>
+	 * 
+	 */
+	public Optional<Character> getById(Long arg0);
+
+	/**
+	 *
+	 * delete character by id
+	 *
+	 * @param Long id
+	 * @return Message
+	 * 
+	 */
+	public Message delete(Long arg0);
+
+	/**
+	 *
+	 * update character
+	 *
+	 * @param Long id to update
+	 * @param CharacterDTO
+	 * @return Message
+	 * 
+	 */
+	public Message update(Long arg0, CharacterDTO arg1);
+
+	/**
+	 *
+	 * retrieve Character byName
+	 *
+	 * @param String
+	 * @return Optional<CharacterDTO>
+	 * 
+	 */
+	public Optional<CharacterDTO> getByName(String arg0);
+
 }

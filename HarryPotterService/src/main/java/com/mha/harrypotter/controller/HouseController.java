@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.mha.harrypotter.model.dto.Houses;
-import com.mha.harrypotter.service.HouseService;
 
 @RestController
 public class HouseController {
@@ -26,9 +25,7 @@ public class HouseController {
 	@Autowired
 	private RestTemplate template;
 	@Autowired
-	private HttpEntity header;
-	@Autowired
-	private HouseService service;
+	private HttpEntity<?> header;
 
 	private static final Logger log = LoggerFactory.getLogger(HouseController.class);
 	private static String CONSUMING_URL = "http://us-central1-rh-challenges.cloudfunctions.net/potterApi/houses";
@@ -41,12 +38,11 @@ public class HouseController {
 	 */
 	public Optional<Houses> getAllHouses() {
 
-//		HouseDTO[] houseList = null;
 		ResponseEntity<Houses> response = null;
 
 		try {
 
-			response = template.exchange(CONSUMING_URL, HttpMethod.GET, header, Houses.class);
+			response = template.exchange(CONSUMING_URL, HttpMethod.GET, this.header, Houses.class);
 
 		} catch (Exception e) {
 			log.error("Fail on communicate to API: " + e.getMessage());
@@ -80,9 +76,8 @@ public class HouseController {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("apiKey", API_KEY);
-		HttpEntity request = new HttpEntity(headers);
 
-		return request;
+		return new HttpEntity<>(headers);
 
 	}
 

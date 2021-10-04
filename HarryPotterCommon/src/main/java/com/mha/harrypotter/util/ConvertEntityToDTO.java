@@ -27,6 +27,8 @@ public class ConvertEntityToDTO {
 	public <E> E mappingObjects(Object entity, Class<E> dto) {
 
 		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration()
+		  .setFieldMatchingEnabled(true);
 		return modelMapper.map(entity, dto);
 	}
 
@@ -39,6 +41,8 @@ public class ConvertEntityToDTO {
 	 */
 	public <E> List<E> mappingLists(List<?> lst, Class<E> cls) {
 		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration()
+		  .setFieldMatchingEnabled(true);
 		List<E> result = new ArrayList<E>();
 		for (Object obj : lst) {
 			result.add((E) modelMapper.map(obj, cls));

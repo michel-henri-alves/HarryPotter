@@ -1,4 +1,4 @@
-package com.mha.HarryPotterService.service;
+package com.mha.harrypotter.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

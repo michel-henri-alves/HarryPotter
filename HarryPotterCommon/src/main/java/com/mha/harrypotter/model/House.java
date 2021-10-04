@@ -62,19 +62,19 @@ public class House implements Serializable {
 	@Getter
 	@Setter
 	private List<String> colors;
-	@Column(name = "SCHOOL", length = 200)
+	@Column(name = "SCHOOL", nullable = true, length = 200)
 	@Getter
 	@Setter
 	private String school;
-	@Column(name = "MASCOT", nullable = false, length = 200, unique = false)
+	@Column(name = "MASCOT", nullable = false, length = 200)
 	@Getter
 	@Setter
 	private String mascot;
-	@Column(name = "HOUSE_GHOST", nullable = false, length = 200, unique = false)
+	@Column(name = "houseGhost", nullable = false, length = 200)
 	@Getter
 	@Setter
 	private String houseGhost;
-	@Column(name = "FOUNDER", nullable = false, length = 200, unique = false)
+	@Column(name = "FOUNDER", nullable = false, length = 200)
 	@Getter
 	@Setter
 	private String founder;
@@ -89,7 +89,6 @@ public class House implements Serializable {
 	public House(HouseDTO dto) {
 		
 		this.id = dto.getId();
-		this.name = dto.getName();
 		this.headOfHouse = dto.getHeadOfHouse();
 		this.principles = dto.getValues();//changed name because 'values' is a reserved word
 		this.colors = dto.getColors();
@@ -97,6 +96,7 @@ public class House implements Serializable {
 		this.mascot = dto.getMascot();
 		this.houseGhost = dto.getHouseGhost();
 		this.founder = dto.getFounder();
+		this.name = dto.getName();
 	}
 
 }
